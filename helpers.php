@@ -156,6 +156,23 @@ function log_action(SupabaseClient $conn, int $adminId, int $employeeId, string 
  */
 function get_department_list(): array
 {
+    // Departments are stored in the `departments` table (manageable from the
+    // Departments page). Fall back to the built-in list if the table does not
+    // exist yet or is unreachable, so the rest of the site keeps working.
+    static $cache = null;
+    if ($cache !== null) {
+        return $cache;
+    }
+    try {
+        global $conn;
+        $rows = $conn->select('departments', [], 'name', null, 'name');
+        $names = array_values(array_filter(array_map(static fn($r) => (string)($r['name'] ?? ''), $rows)));
+        if ($names) {
+            return $cache = $names;
+        }
+    } catch (Throwable $e) {
+        // fall through to the default list
+    }
     return ['CCTE', 'CBA', 'CCJE', 'CITHM', 'CON', 'CBEA', 'CELA', 'Accounting', 'Marketing', 'LMS'];
 }
 

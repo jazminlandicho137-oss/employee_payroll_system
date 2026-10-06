@@ -1,57 +1,117 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HR System &amp; Payroll &mdash; Project</title>
+<meta name="description" content="HR System & Payroll — an employee management and payroll project built with PHP and Supabase.">
+<meta name="theme-color" content="#7b3fa3">
+<title>HR System &amp; Payroll | Project</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg:#faf3fc; --surface:#ffffff; --soft:#f6edf8; --text:#25182d; --muted:#74667c;
-    --primary:#7b3fa3; --primary-strong:#5f2b84; --accent:#F0AEC9; --border:rgba(68,33,82,0.13);
+    --bg: #faf3fc; --bg-pattern: rgba(104,54,138,0.055);
+    --surface: #ffffff; --surface-soft: #f6edf8; --surface-tint: #f8e8f3;
+    --text: #25182d; --text-soft: #4a3953; --muted: #74667c;
+    --primary: #7b3fa3; --primary-strong: #5f2b84; --primary-soft: #edb7d8;
+    --accent: #F0AEC9; --accent-soft: #f7bfd9;
+    --border: rgba(68,33,82,0.13); --border-strong: rgba(68,33,82,0.23);
+    --navy: #6b3a98;
+    --shadow: 0 24px 70px rgba(65,31,82,0.13);
+    --shadow-soft: 0 12px 35px rgba(65,31,82,0.08);
+    --font-sans: "Manrope","Segoe UI",sans-serif;
+    --font-mono: "DM Mono",Consolas,monospace;
+    --shell: min(1160px, calc(100% - 48px));
   }
-  * { box-sizing:border-box; }
-  body { margin:0; font-family:"Manrope","Segoe UI",sans-serif; background:var(--bg); color:var(--text); line-height:1.7; }
-  header { background:var(--primary); color:#fff; padding:60px 24px; text-align:center; }
-  header h1 { margin:0 0 10px; font-size:2.4rem; }
-  header p { margin:0; color:#eadcf1; }
-  main { max-width:900px; margin:40px auto; padding:0 24px 60px; }
-  section { background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:26px 30px; margin-bottom:22px; }
-  h2 { color:var(--primary); margin-top:0; }
-  code { background:var(--soft); padding:2px 7px; border-radius:6px; font-size:0.92rem; }
-  footer { text-align:center; color:var(--muted); padding:24px; font-size:0.9rem; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; color: var(--text); background-color: var(--bg);
+    background-image: radial-gradient(circle at 14% 3%, rgba(211,63,153,0.1), transparent 27%), radial-gradient(var(--bg-pattern) 1px, transparent 1px);
+    background-size: auto, 22px 22px; font-family: var(--font-sans); line-height: 1.7;
+  }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3, p { margin-top: 0; }
+  .shell { width: var(--shell); margin-inline: auto; }
+
+  header { padding-block: 110px 70px; text-align: center; }
+  .eyebrow { display: inline-block; margin-bottom: 22px; padding: 8px 12px; color: var(--primary); background: rgba(123,63,163,0.09); border: 1px solid rgba(123,63,163,0.18); border-radius: 999px; font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; }
+  header h1 { margin: 0 0 18px; font-size: clamp(3rem, 6vw, 5rem); letter-spacing: -0.07em; }
+  header h1 span { color: var(--primary); }
+  header p.lead { max-width: 620px; margin: 0 auto 34px; color: var(--text-soft); font-size: 1.15rem; }
+
+  .buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn { min-height: 52px; display: inline-flex; align-items: center; gap: 10px; padding: 0 22px; border-radius: 11px; font-size: 1rem; font-weight: 800; border: 1px solid transparent; transition: transform .18s ease, background .18s ease, border-color .18s ease; }
+  .btn:hover { transform: translateY(-3px); }
+  .btn-primary { color: #fff; background: var(--navy); }
+  .btn-primary:hover { background: var(--primary); }
+  .btn-secondary { background: var(--surface); border-color: var(--border); }
+  .btn-secondary:hover { border-color: var(--border-strong); }
+
+  section { padding-block: 34px 90px; }
+  .section-label { color: var(--primary); font-family: var(--font-mono); font-size: 0.9rem; letter-spacing: 0.1em; text-transform: uppercase; }
+  .section-title { margin: 8px 0 34px; font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -0.05em; }
+  .grid { display: grid; gap: 17px; }
+  .feature { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
+  .feature h3 { margin: 0 0 8px; color: var(--primary); }
+  .feature p { margin: 0; color: var(--muted); }
+  .cards-3 .feature:nth-child(2) h3 { color: var(--accent); }
+
+  footer { padding: 40px 0; text-align: center; color: var(--muted); font-family: var(--font-mono); font-size: 0.85rem; border-top: 1px solid var(--border); }
 </style>
 </head>
 <body>
+
 <header>
-  <h1>HR System &amp; Payroll</h1>
-  <p>An HR &amp; payroll web application built with PHP and Supabase.</p>
+  <div class="shell">
+    <span class="eyebrow">ADPROG Project</span>
+    <h1>HR System &amp; <span>Payroll</span></h1>
+    <p class="lead">An employee management and payroll web application built with PHP and Supabase — manage employees, positions, departments, and records in one place.</p>
+    <div class="buttons">
+      <a class="btn btn-primary" href="pages/index.php">Log In</a>
+      <a class="btn btn-secondary" href="https://github.com/jazminlandicho137-oss/Portfolio" target="_blank" rel="noopener">Back to My Portfolio</a>
+    </div>
+  </div>
 </header>
-<main>
-  <section>
-    <h2>About</h2>
-    <p>This project is an employee information and payroll-management system. Admins can manage employees, their personal information, emergency contacts, dependents, educational background, character references, and job positions, with an audit log of every action.</p>
-  </section>
-  <section>
-    <h2>Tech Stack</h2>
-    <ul>
-      <li>PHP (XAMPP)</li>
-      <li>Supabase (PostgREST REST API)</li>
-      <li>HTML, CSS, JavaScript</li>
-    </ul>
-  </section>
-  <section>
-    <h2>Setup</h2>
-    <ol>
-      <li>Place the project inside <code>C:\xampp\htdocs</code>.</li>
-      <li>Start Apache from the XAMPP control panel.</li>
-      <li>Open <code>pages/login.php</code> in your browser.</li>
-    </ol>
-  </section>
-  <section>
-    <h2>Color Palette</h2>
-    <p>Primary: <code>#7b3fa3</code> &middot; Strong: <code>#5f2b84</code> &middot; Soft pink accent: <code>#F0AEC9</code> &middot; Background: <code>#faf3fc</code></p>
-  </section>
-</main>
-<footer>&copy; 2026 HR System &mdash; built for ADPROG.</footer>
+
+<section>
+  <div class="shell">
+    <p class="section-label">What it does</p>
+    <h2 class="section-title">Features</h2>
+    <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+      <div class="feature">
+        <h3>Employee Records</h3>
+        <p>Personal information, photos, emergency contacts, dependents, education, character references, and position history.</p>
+      </div>
+      <div class="feature">
+        <h3>Departments</h3>
+        <p>Browse employees by department, filter, and search the whole workforce quickly.</p>
+      </div>
+      <div class="feature">
+        <h3>Admin Dashboard</h3>
+        <p>Add, edit, delete, and print employee records with a logged audit trail of every action.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="shell">
+    <p class="section-label">Built with</p>
+    <h2 class="section-title">Tech Stack</h2>
+    <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+      <div class="feature"><h3>PHP (XAMPP)</h3><p>Server-rendered pages with session-based admin authentication.</p></div>
+      <div class="feature"><h3>Supabase</h3><p>Postgres database accessed over the PostgREST HTTPS API.</p></div>
+      <div class="feature"><h3>HTML &amp; CSS</h3><p>Custom-styled UI using the same palette as my portfolio.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="shell">
+    <p>HR System &amp; Payroll &mdash; built by Jazmin Landicho &middot; <a href="https://github.com/jazminlandicho137-oss/Portfolio" target="_blank" rel="noopener" style="color:var(--primary);">github.com/jazminlandicho137-oss</a></p>
+  </div>
+</footer>
+
 </body>
 </html>

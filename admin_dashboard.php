@@ -11,10 +11,10 @@ require_admin();
 // correct way (through this dashboard) rather than being opened directly.
 define('ADMIN_DASHBOARD', true);
 
-$page = $_GET['page'] ?? 'employees';
+$page = $_GET['page'] ?? 'departments';
 $allowedPages = ['employees', 'departments', 'loan', 'payroll', 'reports', 'profile'];
 if (!in_array($page, $allowedPages, true)) {
-    $page = 'employees';
+    $page = 'departments';
 }
 ?>
 <!DOCTYPE html>
@@ -23,14 +23,14 @@ if (!in_array($page, $allowedPages, true)) {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HR System &mdash; Admin Dashboard</title>
-<link rel="stylesheet" href="css/admin_dashboard.css?v=5">
+<link rel="stylesheet" href="css/admin_dashboard.css?v=9">
 </head>
 <body>
 
 <header class="topbar">
-  <a class="brand" href="<?= e(dash_url(['page' => 'employees'])) ?>">
-    <img class="brand-logo" src="uploads/photos/logo.PNG" alt="HR System logo" style="width:30px;height:30px;object-fit:contain;border-radius:6px;">
-    HR System
+  <a class="brand" href="<?= e(dash_url(['page' => 'departments'])) ?>">
+    <img class="brand-logo" src="uploads/photos/logo_white.png" alt="HR System logo">
+    <span class="brand-name"><strong>Payroll System</strong><small>HR</small></span>
   </a>
   <nav class="main-nav">
     <a href="<?= e(dash_url(['page' => 'departments'])) ?>" class="<?= $page === 'departments' ? 'active' : '' ?>">Departments</a>
@@ -45,14 +45,15 @@ if (!in_array($page, $allowedPages, true)) {
       <a href="<?= e(dash_url(['page' => 'profile'])) ?>">Edit Profile</a>
     </div>
     <a href="logout.php" class="logout-btn" title="Log Out">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:5px;"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Log Out
-    </a>
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:5px;"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></a>
   </div>
 </header>
 
 <main class="content">
 <?php
 switch ($page) {
+    case 'home':
+        redirect(dash_url(['page' => 'departments']));
     case 'employees':
         require __DIR__ . '/employees.php';
         break;

@@ -4,7 +4,7 @@
     --text:#25182d; --text-muted:#74667c; --error:#B03060; --error-bg:#FCE6EE;
   }
   * { box-sizing:border-box; }
-  body { margin:0; font-family:-apple-system,Segoe UI,sans-serif; background:var(--ink); color:var(--text); }
+  body { margin:0; font-family:-apple-system,Segoe UI,sans-serif; background:var(--paper); color:var(--text); }
   .wrap { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px; }
   .card { width:100%; max-width:380px; }
   .tabs { display:flex; gap:6px; margin-bottom:-1px; }

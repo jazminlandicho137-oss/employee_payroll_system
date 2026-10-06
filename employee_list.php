@@ -47,7 +47,7 @@ $listColumns = 'employee_id,emp_num,last_name,first_name,middle_name,email_addre
 
 if ($selectedDepartment !== '') {
     // Only employees with a position record in that department.
-    $positionRows = $conn->select('employee_position', ['position_department=eq.' . $selectedDepartment], 'employee_id');
+    $positionRows = $conn->select('employee_position', ['position_department=eq."' . $selectedDepartment . '"'], 'employee_id');
     $deptIds = array_values(array_unique(array_map(fn($r) => (int)$r['employee_id'], $positionRows)));
 
     if ($deptIds === []) {
