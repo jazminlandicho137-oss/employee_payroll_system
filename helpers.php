@@ -28,7 +28,7 @@ define('EMPLOYEE_PHOTO_WEB_PATH', 'uploads/employee_photos/');
 function require_admin(): void
 {
     if (($_SESSION['role'] ?? null) !== 'admin') {
-        redirect('login.php');
+        redirect('index.php');
     }
 }
 

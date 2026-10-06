@@ -1,6 +1,6 @@
 :root {
     --ink:#5f2b84; --paper:#faf3fc; --paper-line:rgba(68,33,82,0.13);
-    --forest:#7b3fa3; --forest-dim:#5f2b84; --brass:#e9579b; --blush:#f6edf8;
+    --forest:#7b3fa3; --forest-dim:#5f2b84; --brass:#F0AEC9; --blush:#f6edf8;
     --text:#25182d; --text-muted:#74667c; --error:#B03060; --error-bg:#FCE6EE;
   }
   * { box-sizing:border-box; }

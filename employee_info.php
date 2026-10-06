@@ -10,7 +10,7 @@ if (!defined('ADMIN_DASHBOARD')) { http_response_code(403); exit('Direct access 
 //      disk (in /uploads/employee_photos/), and remembers its filename in
 //      employee_info.photo_filename so it can be shown again later.
 //   3. If the admin typed something into the "Employee Password" field,
-//      saves/updates that employee's login (see login.php / authenticate.php).
+//      saves/updates that employee's login (see index.php / authenticate.php).
 //      The login username is always their Employee Number, and the login
 //      department is worked out automatically from the Employee Position tab.
 //

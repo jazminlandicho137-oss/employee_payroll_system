@@ -23,7 +23,7 @@ unset($_SESSION['old_role'], $_SESSION['old_username']);
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HR System &mdash; Sign In</title>
-<link rel="stylesheet" href="css/login.css?v=4">
+<link rel="stylesheet" href="css/login.css?v=5">
 </head>
 <body>
 

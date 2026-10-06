@@ -16,13 +16,13 @@ require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/helpers.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    redirect('login.php');
+    redirect('index.php');
 }
 
 $submittedToken = $_POST['csrf_token'] ?? '';
 if (empty($_SESSION['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $submittedToken)) {
     $_SESSION['login_error'] = 'Your session expired. Please try again.';
-    redirect('login.php');
+    redirect('index.php');
 }
 
 $role = ($_POST['role'] ?? 'employee') === 'admin' ? 'admin' : 'employee';
@@ -43,7 +43,7 @@ if ($loginIdentifier === '' || $password === '') {
     $_SESSION['login_error'] = $role === 'employee'
         ? 'Please fill in your Employee Number and Password.'
         : 'Please fill in your Username and Password.';
-    redirect('login.php');
+    redirect('index.php');
 }
 
 // --- Admin login ---
@@ -56,7 +56,7 @@ if ($role === 'admin') {
 
     if (!$admin || !password_verify($password, $admin['password'])) {
         $_SESSION['login_error'] = $genericError;
-        redirect('login.php');
+        redirect('index.php');
     }
 
     regenerate_session();
@@ -87,7 +87,7 @@ $employeeRow = $conn->selectOne(
 
 if (!$employeeRow || $employeeRow['password'] === null || !password_verify($password, $employeeRow['password'])) {
     $_SESSION['login_error'] = $genericError;
-    redirect('login.php');
+    redirect('index.php');
 }
 
 regenerate_session();
